@@ -1,0 +1,63 @@
+<div class="container">
+  <h1>Create user</h1>
+  <article>
+    <form action="/api/sessions/auth/register" method="post">
+      <div class="grid">
+        <div>
+          <label for="firstName">
+            FirstName:
+            <input type="text" name="firstName" id="firstName" required />
+          </label>
+        </div>
+        <div>
+          <label for="lastName">
+            LastName:
+            <input type="text" name="lastName" id="lastName" required />
+          </label>
+        </div>
+      </div>
+      <label for="age">
+        Age:
+        <input type="number" name="age" id="age" required />
+      </label>
+      
+      <details role="list">
+        <summary aria-haspopup="listbox">Role</summary>
+        <ul role="listbox">
+          <li>
+            <label for="admin">
+              <input type="radio" id="admin" name="role" value="admin" />
+              Admin
+            </label>
+          </li>
+          <li>
+            <label for="user">
+              <input type="radio" id="user" name="role" value="user" />
+              User
+            </label>
+          </li>
+        </ul>
+      </details>
+
+      <label for="email">
+        Email:
+        <input type="email" name="email" id="email" required >
+      </label>
+
+      <label for="password">
+        Password:
+        <input type="password" name="password" id="password" required >
+      </label>
+
+      <button type="submit">Register</button>
+
+      <hr>
+
+      <article style="text-align: center;">
+        I already have an account
+        <a href="/login"> Login </a>
+      </article>
+
+    </form>
+  </article>
+</div>
