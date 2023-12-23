@@ -15,10 +15,10 @@ sessionRouter.post("/sessions/auth/register", async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(body.password, salt);
     body.password = hashedPassword;
-
+    body.role = body.role === "" ? "user" : body.role;
     const cart = await AddCart();
     const user = await AddUser(body, cart._id);
-    res.status(201).json(user);
+    res.redirect('/login');
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

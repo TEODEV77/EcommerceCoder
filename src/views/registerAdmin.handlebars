@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Create user</h1>
+  <h1>Admin </h1>
   <article>
     <form action="/api/sessions/auth/register" method="post">
       <div class="grid">
@@ -21,6 +21,24 @@
         <input type="number" name="age" id="age" required />
       </label>
       
+      <details role="list">
+        <summary aria-haspopup="listbox">Role</summary>
+        <ul role="listbox">
+          <li>
+            <label for="admin">
+              <input type="radio" id="admin" name="role" value="admin" />
+              Admin
+            </label>
+          </li>
+          <li>
+            <label for="user">
+              <input type="radio" id="user" name="role" value="user" />
+              User
+            </label>
+          </li>
+        </ul>
+      </details>
+
       <label for="email">
         Email:
         <input type="email" name="email" id="email" required >

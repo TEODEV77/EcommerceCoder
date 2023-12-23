@@ -13,7 +13,6 @@ renderRouter.get("/login", (req, res) => {
 });
 
 renderRouter.get("/me", authMiddlewarePassport("jwt"), (req, res) => {
-  console.log(req.user);
   res.render("me", req.user);
 });
 
