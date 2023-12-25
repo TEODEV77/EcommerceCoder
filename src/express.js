@@ -10,7 +10,9 @@ import sessionRouter from "./routers/sessions.routes.js";
 
 import { environment as env } from "./env/config.js";
 import renderRouter from "./routers/views/render.routes.js";
+import routerProducts from "./routers/product.routes.js";
 import renderAdminRouter from "./routers/views/render.admin.routes.js";
+import renderProduct from "./routers/views/render.product.js";
 
 const app = express();
 app.use(cookieParser(env.dev.cookie.secret));
@@ -25,8 +27,8 @@ app.set("view engine", "handlebars");
 initPassport();
 app.use(passport.initialize());
 
-app.use("/api", sessionRouter );
-app.use('/', renderRouter, renderAdminRouter);
+app.use("/api", sessionRouter, routerProducts);
+app.use("/", renderRouter, renderAdminRouter, renderProduct);
 
 app.get("/", (req, res) => {
   res.redirect("login");

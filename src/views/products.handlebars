@@ -1,0 +1,19 @@
+<div class="container">
+    <hr>
+    <h2>Products List</h2>
+    <p><strong>TotalPages: {{paginate.totalPages}}</strong></p>
+    {{#each paginate.payload}}
+    <details>
+    <summary role="button" class="contrast">{{this.title}} - Price: ${{this.price}}</summary>
+    <article>
+      <p><strong>Category: </strong>{{category}}</p>
+      <p><strong>Description: </strong>{{description}}</p>
+      <p><strong>Stock: </strong>{{stock}}</p>
+      <p><strong>Price: </strong>{{price}}</p>
+      <button  onclick="addToCart('{{../cart}}','{{this._id}}')"> Add to cart </button> 
+
+    </article>
+    </details>
+    {{/each}}
+    
+</div>

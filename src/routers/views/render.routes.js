@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { authMiddlewarePassport } from "../../config/middleware/authMiddleware.js";
+import { authMiddlewarePassport, authorizeMiddlewarePassport } from "../../config/middleware/authMiddleware.js";
 
 const renderRouter = Router();
 
@@ -16,7 +16,7 @@ renderRouter.get("/me", authMiddlewarePassport("jwt"), (req, res) => {
   res.render("me", req.user);
 });
 
-renderRouter.get("/admin", authMiddlewarePassport("jwt"), (req, res) => {
+renderRouter.get("/admin", authMiddlewarePassport("jwt"), authorizeMiddlewarePassport(['admin']), (req, res) => {
   res.render("admin");
 });
 
