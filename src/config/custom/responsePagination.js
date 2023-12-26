@@ -11,9 +11,8 @@ export const paginateResponseSuccess = (out) => {
     pagingCounter: out.pagingCounter,
     hasPrevPage: out.hasPrevPage,
     hasNextPage: out.hasNextPage,
-    prevPage: `${env.dev.api.host}:/products?limit=${out.limit}&page=${out.prevPage}`,
-    nextPage: `http://localhost:${process.env.PORT}/products?limit=${out.limit}&page=${out.nextPage}`,
+    prevPage: `${env.dev.api.host}:${env.dev.api.port}/products?limit=${out.limit}&page=${out.prevPage}`,
+    nextPage: `${env.dev.api.host}:${env.dev.api.port}/products?limit=${out.limit}&page=${out.nextPage}`,
   };
 };
 
-'payload: out.docs.map((w) => page: out.page, out.sjddjj)'

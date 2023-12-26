@@ -1,7 +1,18 @@
 <div class="container">
     <hr>
     <h2>Products List</h2>
-    <p><strong>TotalPages: {{paginate.totalPages}}</strong></p>
+    <div class="grid">
+      <div>
+        <h2><strong>Total Pages: {{paginate.totalPages}}</strong></h2>
+      </div>
+      <div>
+        <h2><strong>Current page: {{paginate.page}}</strong></h2>
+      </div>
+      <div>
+        <a href="{{paginate.prevPage}}"  {{#unless paginate.hasPrevPage}} disabled {{/unless}}  role="button" >Prev </a>
+        <a href="{{paginate.nextPage}}" {{#unless paginate.hasNextPage}} disabled {{/unless}}   role="button" >Next </a>
+      </div>
+    </div>
     {{#each paginate.payload}}
     <details>
     <summary role="button" class="contrast">{{this.title}} - Price: ${{this.price}}</summary>
