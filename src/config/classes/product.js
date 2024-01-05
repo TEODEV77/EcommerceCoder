@@ -1,4 +1,4 @@
-import productSchema from "../../models/product.model.js";
+import productSchema from "../../dao/models/product.model.js";
 
 export const create = async (product) => {
   const newProduct = await productSchema.create(product);

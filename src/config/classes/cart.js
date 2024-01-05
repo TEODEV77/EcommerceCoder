@@ -1,4 +1,4 @@
-import cartSchema from "../../models/cart.model.js";
+import cartSchema from "../../dao/models/cart.model.js";
 
 export const create = async () => {
   const payload = { products: [] };
