@@ -14,6 +14,7 @@ import renderAdminRouter from "./routers/views/render.admin.routes.js";
 import renderProduct from "./routers/views/render.product.js";
 
 import routerProducts from "./routers/api/product.routes.js";
+import routerCart from "./routers/api/cart.routes.js";
 
 const app = express();
 app.use(cookieParser(env.dev.cookie.secret));
@@ -28,7 +29,7 @@ app.set("view engine", "handlebars");
 initPassport();
 app.use(passport.initialize());
 
-app.use("/api", sessionRouter, routerProducts);
+app.use("/api", sessionRouter, routerProducts, routerCart);
 app.use("/", renderRouter, renderAdminRouter, renderProduct);
 
 app.get("/", (req, res) => {
