@@ -9,6 +9,10 @@ export default class CartsService {
     return CartDao.getCartById(id);
   }
 
+  static populateCart(id) {
+    return CartDao.populateCart(id);
+  }
+
   static async addProduct(cid, pid, quantity) {
     return CartDao.addProduct(cid, pid, quantity);
   }
@@ -17,11 +21,11 @@ export default class CartsService {
     return CartDao.delete(id);
   }
 
-  static deleteItemFromCart (cid,pid) {
-    return CartDao.deleteItemFromCart(cid,pid);
+  static deleteItemFromCart(cid, pid) {
+    return CartDao.deleteItemFromCart(cid, pid);
   }
 
-  static deleteItemsFromCart (cartId) {
+  static deleteItemsFromCart(cartId) {
     return CartDao.deleteItemsFromCart(cartId);
   }
 }

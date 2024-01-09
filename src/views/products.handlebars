@@ -16,6 +16,7 @@
       <div>
         <a href="{{paginate.prevPage}}"  {{#unless paginate.hasPrevPage}} disabled {{/unless}}  role="button" >Prev </a>
         <a href="{{paginate.nextPage}}" {{#unless paginate.hasNextPage}} disabled {{/unless}}   role="button" >Next </a>
+        <a href="/me" role="button" >Home</a>
       </div>
     </div>
     {{#each paginate.payload}}
@@ -33,3 +34,5 @@
     {{/each}}
     
 </div>
+<script src="js/cart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -7,7 +7,7 @@ export const environment = {
     cookie: {
       secret: process.env.COOKIE_SECRET,
       options: {
-        maxAge: 2000*60,
+        maxAge: 7000*60,
         signed: process.env.COOKIE_SIGNED,
         httpOnly: process.env.COOKIE_HTTP_ONLY,
       },

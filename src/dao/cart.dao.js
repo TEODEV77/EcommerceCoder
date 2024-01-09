@@ -13,6 +13,10 @@ export default class CartDao {
         return cartModel.findOne({_id: id});
     }
 
+    static populateCart( id) {
+        return cartModel.findOne({_id: id}).populate("products.product");
+    }
+
     static async addProduct(cid, pid, quantity) {
         const cart = await this.getCartById(cid);
 
@@ -25,38 +29,38 @@ export default class CartDao {
         if(!product){
             throw new BadRequest('Product no Found');
         }
-
+        
         const productCart = cart.products.find( (productId) => productId.product == pid);
 
         if(productCart){
             productCart.quantity += quantity;
-            await cartModel.updateOne({_id: cid}, {$set: cart});
+            await cartModel.updateOne({_id: cid}, {$set: cart});   
             return cart;
         }
 
-        cart.products.push({product: pid, quantity: quantity});
+        cart.products.push({product: pid, quantity: quantity});               
         await cartModel.updateOne({_id: cid}, {$set: cart});
         return cart;
 
     }
 
     static delete (cartId) {
-        return cartModel.deleteOne({_id: cartId});
+        return cartModel.deleteOne({_id: cartId});       
     }
 
     static async deleteItemFromCart (cartId, pid) {
         const cart = await this.getCartById(cartId);
 
         if(!cart){
-            throw new BadRequest('Cart no Found');
+            throw new BadRequest('Cart no Found');         
         }
 
         const index = cart.products.findIndex((productId) => productId.product == pid);
 
-        if( index === -1 ) {
+        if( index === -1 ) {          
             throw new BadRequest('Product no Found');
         }
-
+                 
         cart.products.splice(index, 1);
         await cartModel.updateOne({_id: cartId}, {$set: cart});
         return cart;

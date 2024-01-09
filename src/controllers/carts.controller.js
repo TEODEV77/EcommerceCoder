@@ -9,6 +9,10 @@ export default class CartsController {
     return CartsService.getCartById(id);
   }
 
+  static populateCart(id) {
+    return CartsService.populateCart(id);
+  }
+
   static async addProduct(cid, pid, quantity) {
     return CartsService.addProduct(cid, pid, quantity);
   }
