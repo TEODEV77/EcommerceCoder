@@ -2,8 +2,16 @@ import productModel from "./models/product.model.js";
 
 export default class ProductDao {
 
+    static test () {
+        return "Hi, From mongo";
+    }
+
     static getAll (queryCriteria,options) {
         return productModel.paginate(queryCriteria, options);
+    }
+
+    static get (filters = {}, options = {}) {
+        return productModel.paginate(filters, options);
     }
 
     static getProduct (id) {

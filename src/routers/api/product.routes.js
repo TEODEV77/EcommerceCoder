@@ -1,6 +1,8 @@
 import { Router } from "express";
 import ProductsController from "../../controllers/products.controller.js";
 import { paginateResponseSuccess } from "../../config/custom/responsePagination.js";
+import { environment as env} from "../../env/config.js";
+
 
 const routerProducts = Router();
 
@@ -12,6 +14,11 @@ routerProducts.post("/products", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+routerProducts.get("/test", async (req, res, next) => {
+  const test = await ProductsController.test();
+  res.status(200).json(test);
 });
 
 routerProducts.get("/products", async (req, res, next) => {
@@ -33,8 +40,14 @@ routerProducts.get("/products", async (req, res, next) => {
 
   try {
     const products = await ProductsController.getAll(queryCriteria, options);
-    const response = paginateResponseSuccess(products);
-    res.status(200).json(response);
+    
+    if(env.dev.persistence === "MONGO"){
+      const response = paginateResponseSuccess(products);
+      return res.status(200).json(response);
+    }
+    
+    res.status(200).json(products);
+    
   } catch (error) {
     next(error);
   }

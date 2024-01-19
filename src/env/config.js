@@ -1,5 +1,6 @@
 export const environment = {
   dev: {
+    persistence: process.env.PERSISTENCE || 'MONGO',
     api: {
       port: process.env.PORT || 3000,
       host: process.env.LOCALHOST,

@@ -40,9 +40,8 @@ const addToCart = async (cid, pid) => {
 const deleteItemFromCart = async (cid, pid) => {
 
   const endpoint = `/api/carts/${cid}/${pid}`;
-  console.log(endpoint);
-
-  fetch(`/api/carts/${cid}/${pid}`, {
+ 
+  fetch(endpoint, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

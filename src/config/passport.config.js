@@ -6,8 +6,8 @@ import { Strategy as JWTStrategy } from "passport-jwt";
 import { Strategy as GitHubStrategy } from "passport-github2";
 
 import { jwtOptions } from "../config/custom/jwtOptions.js";
-import { create as addUser, findByEmail } from "./classes/user.js";
-import { create as addCart } from "./classes/cart.js";
+
+import UsersService from '../services/users.service.js';
 
 export const initPassport = () => {
   passport.use(
@@ -23,7 +23,7 @@ export const initPassport = () => {
           return done(new Error("No email"));
         }
 
-        let user = await findByEmail(email);
+        let user = await UsersService.findByEmail(email);
 
         if (user) {
           return done(null, user);
@@ -40,8 +40,7 @@ export const initPassport = () => {
           age: 17,
         };
 
-        const cart = await addCart();
-        const newUser = await addUser(user, cart._id);
+        const newUser = await UsersService.createUserCart(user);
 
         return done(null, newUser);
       }

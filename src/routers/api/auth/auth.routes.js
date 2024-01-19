@@ -2,7 +2,7 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import UsersController from "../../../controllers/users.controller.js";
 import { environment as env } from "../../../env/config.js";
-import { generateToken } from "../../../utils.js";
+import { generateToken } from "../../../utils/jwt.js";
 import passport from "passport";
   
 const authRouter = Router();

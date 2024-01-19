@@ -1,23 +1,31 @@
-import ProductDao from "../dao/product.dao.js";
+import { productRepository } from "../repositories/index.js";
 
 export default class ProductsService {
+  static test() {
+    return productRepository.test();
+  }
+
   static getAll(queryCriteria, options) {
-    return ProductDao.getAll(queryCriteria, options);
+    return productDao.getAll(queryCriteria, options);
+  }
+
+  static get(filters = {}, options = {}) {
+    return productDao.get((filters = {}), (options = {}));
   }
 
   static getProduct(id) {
-    return ProductDao.getProduct(id);
+    return productDao.getProduct(id);
   }
 
   static create(payload) {
-    return ProductDao.create(payload);
+    return productDao.create(payload);
   }
 
   static updateById(id, payload) {
-    return ProductDao.updateById(id, payload);
+    return productDao.updateById(id, payload);
   }
 
   static deleteById(id) {
-    return ProductDao.deleteById(id);
+    return productDao.deleteById(id);
   }
 }

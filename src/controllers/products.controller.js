@@ -1,9 +1,15 @@
 import ProductsService from "../services/products.service.js";
-import { BadRequest, NotFound } from "../utils/exception.js";
+import { BadRequest } from "../utils/exception.js";
 
 export default class ProductsController {
+  
+  static test (){
+    return ProductsService.test();
+  }
+  
   static getAll(queryCriteria, options) {
     return ProductsService.getAll(queryCriteria, options);
+    
   }
 
   static getProduct(id) {

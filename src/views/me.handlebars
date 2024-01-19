@@ -8,14 +8,25 @@
       <li><a href="/api/sessions/auth/logout"> Logout </a></li>
     </ul>
   </nav>
-  <article>
-    <p><strong><h3 style="display: inline;">First Name:</h3> </strong> <h5 style="display: inline;" >{{userInfo.firstName}}</h5></p>
-    <p><strong><h3 style="display: inline;">Last Name:</h3> </strong> <h5 style="display: inline;" >{{userInfo.lastName}}</h5></p>
-    <p><strong><h3 style="display: inline;">Username:</h3> </strong> <h5 style="display: inline;" >{{userInfo.username}}</h5></p>
-    <p><strong><h3 style="display: inline;">Role:</h3> </strong> <h5 style="display: inline;" >{{userInfo.role}}</h5></p>
-    <p><strong><h3 style="display: inline;">Email:</h3> </strong> <h5 style="display: inline;" >{{userInfo.email}}</h5></p>
-    <p><strong><h3 style="display: inline;">Age:</h3> </strong> <h5 style="display: inline;" >{{userInfo.age}}</h5></p>
-  </article>
+  {{#if user.isLoggedWithProvider}}
+    <article>
+    <p><strong><h3 style="display: inline;">First Name:</h3> </strong> <h5 style="display: inline;" >{{user.firstName}}</h5></p>
+    <p><strong><h3 style="display: inline;">Username:</h3> </strong> <h5 style="display: inline;" >{{user.username}}</h5></p>
+    <p><strong><h3 style="display: inline;">Provider:</h3> </strong> <h5 style="display: inline;" >{{user.provider}}</h5></p>
+    <p><strong><h3 style="display: inline;">Role:</h3> </strong> <h5 style="display: inline;" >{{user.role}}</h5></p>
+    <p><strong><h3 style="display: inline;">Email:</h3> </strong> <h5 style="display: inline;" >{{user.email}}</h5></p>
+    <p><strong><h3 style="display: inline;">Age:</h3> </strong> <h5 style="display: inline;" >{{user.age}}</h5></p>
+   </article>
+  {{else}}
+    <article>
+    <p><strong><h3 style="display: inline;">First Name:</h3> </strong> <h5 style="display: inline;" >{{user.firstName}}</h5></p>
+    <p><strong><h3 style="display: inline;">Last Name:</h3> </strong> <h5 style="display: inline;" >{{user.lastName}}</h5></p>
+    <p><strong><h3 style="display: inline;">Role:</h3> </strong> <h5 style="display: inline;" >{{user.role}}</h5></p>
+    <p><strong><h3 style="display: inline;">Email:</h3> </strong> <h5 style="display: inline;" >{{user.email}}</h5></p>
+    <p><strong><h3 style="display: inline;">Age:</h3> </strong> <h5 style="display: inline;" >{{user.age}}</h5></p>
+   </article>
+  {{/if}}
+  
   <hr>
 
   <h2>Cart</h2>
