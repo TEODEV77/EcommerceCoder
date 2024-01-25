@@ -21,7 +21,7 @@
     </div>
     {{#each paginate.payload}}
     <details>
-    <summary role="button" class="contrast">{{this.title}} - Price: ${{this.price}}</summary>
+    <summary role="button" class="contrast">{{this.title}} - Price: ${{this.price}} - Stock: ${{this.stock}}</summary>
     <article>
       <p><strong>Category: </strong>{{category}}</p>
       <p><strong>Description: </strong>{{description}}</p>
@@ -32,6 +32,8 @@
     </article>
     </details>
     {{/each}}
+
+    
     
 </div>
 <script src="js/cart.js"></script>

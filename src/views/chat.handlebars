@@ -1,0 +1,30 @@
+<div class="container">
+
+  <nav>
+    <ul>
+      <li><h3><strong>Welcome, <span id="user">{{firstName}}</span></strong></h3></li>
+    </ul>
+    <ul>
+      <li><a href="/api/sessions/auth/logout" role="button" > Logout </a></li>
+      <li><a href="/me" role="button">Home</a></li>
+    </ul>
+  </nav>
+  
+  <div>
+    <label for="">
+      <strong><ins>Chatear</ins></strong>
+      <input id="txtMessage" type="text" placeholder="Send message" />
+    </label>
+    <button onclick="sendMessage('{{firstName}}')"> Send message </button>
+  </div>
+  <hr />
+
+  <div id="messages">
+
+  </div>
+
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/chat.js"></script>

@@ -1,11 +1,12 @@
 <div class="container">
   <nav>
     <ul>
-      <li><strong>Profile</strong></li>
+      <li><h3><strong>Welcome, <span id="user">{{user.firstName}}</span></strong></h3></li>
     </ul>
     <ul>
-      <li><a href="/products">Products</a></li>
-      <li><a href="/api/sessions/auth/logout"> Logout </a></li>
+      <li><a href="/io" role="button" >Chat</a></li>
+      <li><a href="/products" role="button" >Products</a></li>
+      <li><a href="/api/sessions/auth/logout" role="button" > Logout </a></li>
     </ul>
   </nav>
   {{#if user.isLoggedWithProvider}}
@@ -29,12 +30,11 @@
   
   <hr>
 
-  <h2>Cart</h2>
+  <h2>Total Cart: <span>$ <strong><ins>{{user.amount}}</ins></strong></span></h2> 
 
   <table>
   <thead>
     <tr>
-     
       <th scope="col">Name</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
@@ -54,9 +54,9 @@
     </tr>
 
     {{/each }}
-
   </tbody>
 </table>
+  <button onclick="test('{{car.products.product.title}}')" > Buy </button>
 </div>
 <script src="js/cart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -16,6 +16,9 @@ import renderProduct from "./routers/views/render.product.js";
 import routerProducts from "./routers/api/product.routes.js";
 import routerCart from "./routers/api/cart.routes.js";
 import authRouter from "./routers/api/auth/auth.routes.js";
+import routerIo from "./routers/views/io/render.io.js";
+import routerAdminIo from "./routers/views/io/render.admin.io.routes.js";
+
 
 const app = express();
 app.use(cookieParser(env.dev.cookie.secret));
@@ -30,8 +33,8 @@ app.set("view engine", "handlebars");
 initPassport();
 app.use(passport.initialize());
 
-app.use("/api", authRouter, routerProducts, routerCart);
-app.use("/", renderRouter, renderAdminRouter, renderProduct, renderAuthRouter);
+app.use("/api", authRouter, routerProducts, routerCart );
+app.use("/", renderRouter, renderAdminRouter, renderProduct, renderAuthRouter, routerIo, routerAdminIo);
 
 app.get("/", (req, res) => {
   res.redirect("login");

@@ -1,15 +1,12 @@
 import Messages from "./../utils/messages.js";
 
 export default class ProductDao {
-  static test() {
-    return "Hi, From memory";
-  }
-
+  
   static getAll(queryCriteria, options) {
     return Messages.resourceNotAvailable();
   }
 
-  static get(filters = {}) {
+  static get(filters = {}, options = {}) {
     return Messages.resourceNotAvailable();
   }
 
@@ -28,4 +25,9 @@ export default class ProductDao {
   static deleteById(id) {
     return Messages.resourceNotAvailable();
   }
+
+  static updateStocksById(ids,quantities) {
+    return Messages.resourceNotAvailable();
+  }
+
 }

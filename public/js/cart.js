@@ -8,6 +8,10 @@ const successAddToCart = (pid) => {
 
 };
 
+const test = (shop) => {
+  console.log(shop);
+}
+
 
 const errAddToCart = () => {
   Swal.fire({

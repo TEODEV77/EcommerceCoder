@@ -28,4 +28,24 @@ export default class CartsService {
   static deleteItemsFromCart(cartId) {
     return CartDao.deleteItemsFromCart(cartId);
   }
+
+  static checkAvailability(cart) {
+    const inStock = cart.products.filter(
+      (item) => item.product.stock >= item.quantity
+    );
+    const outOfStock = cart.products.filter(
+      (item) => item.product.stock < item.quantity
+    );
+    const availability = { purchased: inStock, notPurchased: outOfStock };
+    return availability;
+  }
+
+  static getIds(cart) {
+    const newList = cart.map((item => item.product._id));
+    return newList;
+  }
+  static getQuantities(cart) {
+    const newList = cart.map((item => ((item.quantity)*-1)));
+    return newList;
+  }
 }

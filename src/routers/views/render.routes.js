@@ -1,6 +1,9 @@
 import { Router } from "express";
 
-import { authMiddlewarePassport, authorizeMiddlewarePassport } from "../../config/middleware/authMiddleware.js";
+import {
+  authMiddlewarePassport,
+  authorizeMiddlewarePassport,
+} from "../../config/middleware/authMiddleware.js";
 import CartsController from "../../controllers/carts.controller.js";
 import UserDto from "../../dto/user.dto.js";
 
@@ -16,15 +19,16 @@ renderRouter.get("/login", (req, res) => {
 
 renderRouter.get("/me", authMiddlewarePassport("jwt"), async (req, res) => {
   const cart = await CartsController.populateCart(req.user.cart);
+  const amount = cart.products.reduce(
+    (acc, item) => acc + item.product.price * item.quantity,
+    0
+  );
   const user = new UserDto(req.user);
-  if(user.provider != "No provider"){
+  user.amount = amount;
+  if (user.provider != "No provider") {
     user.isLoggedWithProvider = true;
   }
-  res.render("me", {car: cart.toJSON(), user});
-});
-
-renderRouter.get("/admin", authMiddlewarePassport("jwt"), authorizeMiddlewarePassport(['admin']), (req, res) => {
-  res.render("admin");
+  res.render("me", { car: cart.toJSON(), user });
 });
 
 export default renderRouter;

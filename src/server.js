@@ -10,9 +10,9 @@ import MongoSingleton from "./database/mongoSingleton.js";
 
 Messages.initMessages(flags);
 
-const mode = flags.p;
+const persistence = flags.p;
 const env = flags.e;
-if (mode === "MONGO") {
+if (persistence === "MONGO") {
   await MongoSingleton.getInstance();
 }
 
