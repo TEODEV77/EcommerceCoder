@@ -10,6 +10,7 @@ const successAddToCart = (pid) => {
 
 const test = (shop) => {
   console.log(shop);
+  console.log(shop.products);
 }
 
 
