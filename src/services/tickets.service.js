@@ -1,11 +1,10 @@
 import { faker } from '@faker-js/faker';
-
-import TicketDao from './../dao/ticket.dao.js';
+import { ticketRepository } from '../repositories/index.js';
 
 export default class TicketService {
 
     static create (ticket) {
         ticket.code = faker.string.uuid();
-        return TicketDao.create(ticket);
+        return ticketRepository.dao.create(ticket);
     }
 }

@@ -1,7 +1,8 @@
-import messageDao from "../dao/message.dao.js";
+import { messageRepository } from "../repositories/index.js";
 
 export default class MessagesService {
   static getAll() {
-    return messageDao.getAll();
+    return messageRepository.dao.getAll();
   }
 }
+

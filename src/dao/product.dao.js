@@ -31,11 +31,14 @@ export default class ProductDao {
     return productModel.deleteOne({ _id: id });
   }
   
-  static updateStocksById(ids, quantities) {
-
-    ids.forEach((element, index) => {
-      productModel.updateOne({ _id: element },{ $inc: { stock: quantities[index] } });
-    });
-    
+  static async updateStocksById(ids, quantities) {
+    try {
+      await Promise.all(ids.map(async (element, index) => {
+        await productModel.updateOne({ _id: element }, { $inc: { stock: quantities[index] } });
+      }));
+    } catch (error) {
+      console.error("Error updating stocks:", error);
+      throw error;
+    }
   }
 }
