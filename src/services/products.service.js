@@ -3,7 +3,7 @@ import { productRepository } from "../repositories/index.js";
 export default class ProductsService {
   
   static getAll(queryCriteria, options) {
-    return productRepository.getAll(queryCriteria, options);
+    return productRepository.dao.getAll(queryCriteria, options);
   }
 
   static get(filters = {}, options = {}) {

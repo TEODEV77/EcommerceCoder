@@ -15,6 +15,7 @@ export default class ProductRepository {
 
   static getProduct(id) {
     return this.dao.getProduct(id);
+  
   }
 
   static create(payload) {
