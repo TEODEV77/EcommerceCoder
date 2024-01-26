@@ -8,7 +8,7 @@ export default class Messages {
   static initMessages(flags) {
     console.log(
       `${ColorsMessage.title("mode:")}${ColorsMessage.value(
-        flags.e
+        flags.wenv
       )} ${ColorsMessage.separator("--")} ${ColorsMessage.title(
         "persistence:"
       )}${ColorsMessage.value(flags.p)} `

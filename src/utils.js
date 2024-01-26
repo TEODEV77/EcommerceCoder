@@ -16,7 +16,7 @@ export const createHash = (plainText) => {
 
 const program = new Command();
 
-program.option('-e <env>','Flag environment', 'dev');
+program.option('--environ <env>','Flag environment', 'dev');
 program.option('-p <persistence>','Flag persistence', 'MONGO');
 program.parse();
 

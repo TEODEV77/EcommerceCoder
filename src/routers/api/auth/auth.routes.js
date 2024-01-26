@@ -37,7 +37,7 @@ authRouter.post("/sessions/auth/login", async (req, res) => {
     const token = generateToken(user);        
     res.cookie("token", token, env.dev.cookie.options);
     //return res.json(token);
-    //return res.redirect('/me');
+    return res.redirect('/me');
   } else {
     return res.redirect("/unauthorized");
   }

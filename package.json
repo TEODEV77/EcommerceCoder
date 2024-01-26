@@ -5,8 +5,8 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file .env . -e prod -p MONGO",
-    "dev": "nodemon --env-file .env . -e dev -p MONGO"
+    "start": "node --env-file .env . --wenv prod -p MONGO",
+    "dev": "nodemon --env-file .env . --wenv dev -p MONGO"
   },
   "author": "TEODEV77",
   "license": "GPL-3.0-only",

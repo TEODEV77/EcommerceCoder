@@ -2,11 +2,7 @@ import productModel from "./models/product.model.js";
 
 export default class ProductDao {
 
-  static test() {
-    console.log("w");
-  }
-
-  
+ 
   static getAll(queryCriteria, options) {
     return productModel.paginate(queryCriteria, options);
   }

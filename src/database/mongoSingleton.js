@@ -4,7 +4,7 @@ import { flags } from '../utils.js';
 import ColorsMessage from "../utils/colors.js";
 export default class MongoSingleton {
   constructor() {
-    const { envi } = envFactory(flags.e);
+    const { envi } = envFactory(flags.environ);
     const { URI } = envi.mongo; 
     this.connection = mongoose.connect(URI);
     console.log(ColorsMessage.title(`Database status:${ColorsMessage.value('Database connected')}`));
