@@ -25,7 +25,7 @@ routerProducts.post(
 );
 
 routerProducts.get("/test", async (req, res, next) => {
-  const test = await ProductsController.test();
+  const test = await ProductsController.getAll();
   res.status(200).json(test);
 });
 

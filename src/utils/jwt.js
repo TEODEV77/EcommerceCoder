@@ -1,11 +1,10 @@
 import JWT from "jsonwebtoken";
 
-import { envFactory } from "../env/index.js";
 import { flags } from "../utils.js";
+import SingletonEnvironment from "../env/singletonEnvironment.js";
 
-const mode = flags.e;
-const { envi } = envFactory(mode);
-const { secret, expiresIn } = envi.jwt;
+const { environment } = SingletonEnvironment.getInstance(flags.environ);
+const { secret, expiresIn } = environment.env.jwt;
 
 export const generateToken = (user) => {
   const { firstName, lastName, role, username, provider, email, age, cart } =

@@ -1,9 +1,13 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import UsersController from "../../../controllers/users.controller.js";
-import { environment as env } from "../../../env/config.js";
 import { generateToken } from "../../../utils/jwt.js";
 import passport from "passport";
+import SingletonEnvironment from "../../../env/singletonEnvironment.js";
+import { flags } from "../../../utils.js";
+
+const { environment } = SingletonEnvironment.getInstance(flags.environ);
+const { options } = environment.env.cookie;
   
 const authRouter = Router();
 
@@ -35,7 +39,7 @@ authRouter.post("/sessions/auth/login", async (req, res) => {
 
   if (comparePassword) {
     const token = generateToken(user);        
-    res.cookie("token", token, env.dev.cookie.options);
+    res.cookie("token", token, options);
     //return res.json(token);
     return res.redirect('/me');
   } else {
@@ -58,7 +62,7 @@ authRouter.get(
   }),
   (req, res) => {
     const token = generateToken(req.user);
-    res.cookie("token", token, env.dev.cookie.options);
+    res.cookie("token", token, options);
     res.redirect("/me");
   }
 );
