@@ -40,7 +40,7 @@ authRouter.post("/sessions/auth/login", async (req, res) => {
   if (comparePassword) {
     const token = generateToken(user);        
     res.cookie("token", token, options);
-    //return res.json(token);
+    return res.json(token);
     return res.redirect('/me');
   } else {
     return res.redirect("/unauthorized");

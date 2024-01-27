@@ -7,6 +7,7 @@ import {
   authorizeMiddlewarePassport,
 } from "../../config/middleware/authMiddleware.js";
 
+
 const routerProducts = Router();
 
 routerProducts.post(
@@ -23,11 +24,6 @@ routerProducts.post(
     }
   }
 );
-
-routerProducts.get("/test", async (req, res, next) => {
-  const test = await ProductsController.getAll();
-  res.status(200).json(test);
-});
 
 routerProducts.get("/products", async (req, res, next) => {
   const { limit = 10, page = 1, category, stock, sort } = req.query;
