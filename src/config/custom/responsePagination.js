@@ -1,5 +1,9 @@
 import ProductDto from "../../dto/product.dto.js";
-import { environment as env } from "../../env/config.js";
+import SingletonEnvironment from "../../env/singletonEnvironment.js";
+import { flags } from "../../utils.js";
+
+const { environment } = SingletonEnvironment.getInstance(flags.environ);
+const { host, port } = environment.env.api;
 
 export const paginateResponseSuccess = (productResponse) => {
   return {
@@ -12,8 +16,8 @@ export const paginateResponseSuccess = (productResponse) => {
     pagingCounter: productResponse.pagingCounter,
     hasPrevPage: productResponse.hasPrevPage,
     hasNextPage: productResponse.hasNextPage,
-    prevPage: `${env.dev.api.host}:${env.dev.api.port}/products?limit=${productResponse.limit}&page=${productResponse.prevPage}`,
-    nextPage: `${env.dev.api.host}:${env.dev.api.port}/products?limit=${productResponse.limit}&page=${productResponse.nextPage}`,
+    prevPage: `${host}:${port}/products?limit=${productResponse.limit}&page=${productResponse.prevPage}`,
+    nextPage: `${host}:${port}/products?limit=${productResponse.limit}&page=${productResponse.nextPage}`,
   };
 };
 

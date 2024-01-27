@@ -1,9 +1,13 @@
-import { environment as env } from "../../env/config.js";
+import SingletonEnvironment from "../../env/singletonEnvironment.js";
+import { flags } from "../../utils.js";
+
+const { environment } = SingletonEnvironment.getInstance(flags.environ);
+const { clientID, clientSecret, callbackURL } = environment.env.github;
 
 export const gitHubOptions = {
-  clientID: env.dev.github.clientID,
-  clientSecret: env.dev.github.clientSecret,
-  callbackURL: env.dev.github.callbackURL,
+  clientID,
+  clientSecret,
+  callbackURL,
 };
 
 

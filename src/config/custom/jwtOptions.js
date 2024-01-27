@@ -1,5 +1,9 @@
 import { ExtractJwt } from "passport-jwt";
-import { environment as env } from "../../env/config.js";
+import SingletonEnvironment from "../../env/singletonEnvironment.js";
+import { flags } from "../../utils.js";
+
+const { environment } = SingletonEnvironment.getInstance(flags.environ);
+const { secret } = environment.env.jwt;
 
 const cookieExtractor = (req) => {
   let token = null;
@@ -10,7 +14,7 @@ const cookieExtractor = (req) => {
 };
 
 export const jwtOptions = {
-  secretOrKey: env.dev.jwt.secret,
+  secretOrKey: secret,
   jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
 };
 

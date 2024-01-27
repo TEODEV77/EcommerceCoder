@@ -5,8 +5,10 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file .env . --environ PROD -p MONGO",
-    "dev": "nodemon --env-file .env . --environ teito -p MONGO"
+    
+    "dev": "nodemon --env-file .env . --environ DEV -p MONGO",
+    "test": "nodemon --env-file .env . --environ TEST -p MONGO",
+    "start": "node --env-file .env . --environ PROD -p MONGO"
   },
   "author": "TEODEV77",
   "license": "GPL-3.0-only",

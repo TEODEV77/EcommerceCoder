@@ -1,4 +1,3 @@
-import { flags } from "../utils.js";
 import ColorsMessage from "./colors.js";
 
 export default class Messages {
@@ -17,7 +16,6 @@ export default class Messages {
   }
 
   static serverRunning (host,port) {
-    console.log(flags)
     console.log(
       `${ColorsMessage.title("Server running at:")} ${ColorsMessage.value(
         host
