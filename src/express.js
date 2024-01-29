@@ -17,11 +17,13 @@ import authRouter from "./routers/api/auth/auth.routes.js";
 import routerIo from "./routers/views/io/render.io.js";
 import routerAdminIo from "./routers/views/io/render.admin.io.routes.js";
 import SingletonEnvironment from "./env/singletonEnvironment.js";
+import mockRouter from "./routers/api/mock/products.mock.js";
 
 const { environment } = SingletonEnvironment.getInstance(flags.environ);
 const { secret } = environment.env.cookie;
 
 const app = express();
+
 app.use(cookieParser(secret));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,7 +36,7 @@ app.set("view engine", "handlebars");
 initPassport();
 app.use(passport.initialize());
 
-app.use("/api", authRouter, routerProducts, routerCart);
+app.use("/api", authRouter, routerProducts, routerCart, mockRouter);
 app.use(
   "/",
   renderRouter,
