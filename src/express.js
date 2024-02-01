@@ -18,6 +18,7 @@ import routerIo from "./routers/views/io/render.io.js";
 import routerAdminIo from "./routers/views/io/render.admin.io.routes.js";
 import SingletonEnvironment from "./env/singletonEnvironment.js";
 import mockRouter from "./routers/api/mock/products.mock.js";
+import { errorHandler } from "./config/middleware/errorHandler.js";
 
 const { environment } = SingletonEnvironment.getInstance(flags.environ);
 const { secret } = environment.env.cookie;
@@ -51,8 +52,7 @@ app.get("/", (req, res) => {
   res.redirect("login");
 });
 
-app.use((err, req, res, next) => {
-  res.status(err.httpCode || 500).json({ error: err.message });
-});
+
+app.use(errorHandler);
 
 export default app;

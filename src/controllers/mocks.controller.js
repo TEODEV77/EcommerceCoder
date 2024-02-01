@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 export default class MocksController {
   static products() {
     let products = [];
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 100; i++) {
       const product = {
         title: faker.commerce.productName(),
         code: faker.datatype.uuid(),

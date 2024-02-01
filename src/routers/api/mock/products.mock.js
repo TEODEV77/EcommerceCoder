@@ -5,12 +5,8 @@ const mockRouter = Router();
 
 mockRouter.get("/mockingproducts", (req, res, next) => {
 
-    const product = MocksController.products();
-
-    res.status(200).json({
-        message: "Mocking products",
-        product
-    });
+    const products = MocksController.products();
+    res.status(200).json(products);
 });
 
 export default mockRouter;
