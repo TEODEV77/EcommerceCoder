@@ -19,12 +19,17 @@ import routerAdminIo from "./routers/views/io/render.admin.io.routes.js";
 import SingletonEnvironment from "./env/singletonEnvironment.js";
 import mockRouter from "./routers/api/mock/products.mock.js";
 import { errorHandler } from "./config/middleware/errorHandler.js";
+import routerMessage from "./routers/api/message.routes.js";
+import { loggerMiddleware } from "./config/logger.js";
+import artilleryRouter from "./routers/custom/artillery.routes.js";
+import loggerRouter from "./routers/api/log/logger.routes.js";
 
 const { environment } = SingletonEnvironment.getInstance(flags.environ);
 const { secret } = environment.env.cookie;
 
 const app = express();
 
+app.use(loggerMiddleware);
 app.use(cookieParser(secret));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,7 +42,7 @@ app.set("view engine", "handlebars");
 initPassport();
 app.use(passport.initialize());
 
-app.use("/api", authRouter, routerProducts, routerCart, mockRouter);
+app.use("/api", authRouter, routerProducts, routerCart, mockRouter, routerMessage, loggerRouter);
 app.use(
   "/",
   renderRouter,
@@ -45,7 +50,8 @@ app.use(
   renderProduct,
   renderAuthRouter,
   routerIo,
-  routerAdminIo
+  routerAdminIo,
+  artilleryRouter
 );
 
 app.get("/", (req, res) => {

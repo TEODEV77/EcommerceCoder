@@ -5,7 +5,6 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    
     "dev": "nodemon --env-file .env . --environ DEV -p MONGO",
     "test": "nodemon --env-file .env . --environ TEST -p MONGO",
     "start": "node --env-file .env . --environ PROD -p MONGO"
@@ -26,7 +25,8 @@
     "passport-github2": "^0.1.12",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
