@@ -1,4 +1,4 @@
-import EnumsError from "./EnumsError";
+import EnumsError from "./EnumsError.js";
 
 export const requiredFields = (payload) => {
   return {
