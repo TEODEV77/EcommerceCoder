@@ -6,7 +6,7 @@ const { environment } = SingletonEnvironment.getInstance(flags.environ);
 const { secret } = environment.env.jwt;
 
 export const authToken = (user,expiresIn) => {
-  const { firstName, lastName, role, username, provider, email, age, cart } =
+  const { firstName, lastName, role, username,provider, email, age, cart } =
     user;
   const payload = {
     firstName,

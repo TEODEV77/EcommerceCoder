@@ -30,11 +30,11 @@ export default class ProductsController {
     return ProductsService.create(payload,email);
   }
 
-  static async updateById(id, payload) {
-    return ProductsService.updateById(id, payload);
+  static async updateById(id, payload,email,role) {
+    return ProductsService.updateById(id, payload,email,role);
   }
 
-  static deleteById(id) {
-    return ProductsService.deleteById(id);
+  static deleteById(id,email,role) {
+    return ProductsService.deleteById(id,email,role);
   }
 }

@@ -60,12 +60,13 @@ routerProducts.get("/products", async (req, res, next) => {
 routerProducts.put(
   "/products/:id",
   authMiddlewarePassport("jwt"),
-  authorizeMiddlewarePassport(["admin"]),
+  authorizeMiddlewarePassport(["admin",'premium']),
   async (req, res, next) => {
     const { body } = req;
     const { id } = req.params;
+    const {email, role } = req.user;
     try {
-      const product = await ProductsController.updateById(id, body);
+      const product = await ProductsController.updateById(id, body,email,role);
       res.status(201).json(product);
     } catch (error) {
       next(error);
@@ -76,11 +77,12 @@ routerProducts.put(
 routerProducts.delete(
   "/products/:id",
   authMiddlewarePassport("jwt"),
-  authorizeMiddlewarePassport(["admin"]),
+  authorizeMiddlewarePassport(["admin",'premium']),
   async (req, res, next) => {
     const { id } = req.params;
+    const {email,role} = req.user;
     try {
-      await ProductsController.deleteById(id);
+      await ProductsController.deleteById(id,email,role);
       res.status(201).json({ message: "Success" });
     } catch (error) {
       next(error);
