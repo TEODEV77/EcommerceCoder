@@ -15,14 +15,15 @@ export default class UsersController {
       if (hashedPassword != 1) {
         return UsersService.updatePassword(id, hashedPassword);
       }
-    } else {
       return CustomError.create({
-        name: "Not matching passwords",
-        cause: "Passwords do not match",
-        message: "Not matching passwords",
+        name: "Same password",
+        cause: "The new password is the same as the old one",
+        message: "Same password",
         idx: EnumsError.USER_ERROR.IDX,
         code: EnumsError.USER_ERROR.INVALID_FIELDS,
       });
+    } else {
+      throw new Error('Password not match');
     }
   }
 

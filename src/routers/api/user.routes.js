@@ -17,8 +17,8 @@ userRouter.put("/users/:uid", async (req, res, next) => {
   const { uid } = req.params;
   const { body } = req;
   try {
-    const updatePass = await UsersController.updatePassword(uid, body);
-    res.status(201).json(updatePass);
+    await UsersController.updatePassword(uid, body);
+    res.status(200).json({ message: "Password has been updated" });
   } catch (error) {
     next(error);
   }
