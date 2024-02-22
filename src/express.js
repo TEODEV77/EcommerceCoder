@@ -23,6 +23,8 @@ import routerMessage from "./routers/api/message.routes.js";
 import { loggerMiddleware } from "./config/logger.js";
 import artilleryRouter from "./routers/custom/artillery.routes.js";
 import loggerRouter from "./routers/api/log/logger.routes.js";
+import routerMail from "./routers/api/mail.routes.js";
+import userRouter from "./routers/api/user.routes.js";
 
 const { environment } = SingletonEnvironment.getInstance(flags.environ);
 const { secret } = environment.env.cookie;
@@ -42,7 +44,7 @@ app.set("view engine", "handlebars");
 initPassport();
 app.use(passport.initialize());
 
-app.use("/api", authRouter, routerProducts, routerCart, mockRouter, routerMessage, loggerRouter);
+app.use("/api", authRouter, routerProducts, routerCart, mockRouter, routerMessage, loggerRouter, routerMail, userRouter);
 app.use(
   "/",
   renderRouter,
@@ -51,7 +53,7 @@ app.use(
   renderAuthRouter,
   routerIo,
   routerAdminIo,
-  artilleryRouter
+  artilleryRouter,
 );
 
 app.get("/", (req, res) => {

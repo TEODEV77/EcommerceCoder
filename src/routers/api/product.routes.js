@@ -13,11 +13,12 @@ const routerProducts = Router();
 routerProducts.post(
   "/products",
   authMiddlewarePassport("jwt"),
-  authorizeMiddlewarePassport(["admin"]),
+  authorizeMiddlewarePassport(['admin','premium']),
   async (req, res, next) => {
     const { body } = req;
+    const { email } = req.user;
     try {
-      const product = await ProductsController.create(body);
+      const product = await ProductsController.create(body,email);
       res.status(201).json(product);
     } catch (error) {
       next(error);

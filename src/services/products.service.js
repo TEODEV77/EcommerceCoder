@@ -14,7 +14,8 @@ export default class ProductsService {
     return productRepository.dao.getProduct(id);
   }
 
-  static create(payload) {
+  static create(payload,email) {
+    payload.owner = email;
     return productRepository.dao.create(payload);
   }
 

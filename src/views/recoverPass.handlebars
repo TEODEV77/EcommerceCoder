@@ -1,0 +1,18 @@
+<div class="container">
+  <article>
+    <h1>Recover Password: <ins><strong>{{email}}</strong></ins> </h1>
+
+    <label for="newpassword">
+      New password:
+      <input type="password" name="newpassword" id="newpassword" required />
+    </label>
+    <label for="password">
+      Confirm password:
+      <input type="password" name="password" id="password" required />
+    </label>
+
+    <button onclick="updatePassword('{{id}}')">Change
+      Password</button>
+  </article>
+</div>
+<script src="js/user.js"></script>

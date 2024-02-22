@@ -5,6 +5,10 @@ export default class UserDao {
     return userModel.create(payload);
   }
 
+  static findById(id) {
+    return userModel.findOne({ _id: id });
+  }
+
   static findByEmail(email) {
     return userModel.findOne({ email: email });
   }
@@ -15,5 +19,14 @@ export default class UserDao {
 
   static deleteById(id) {
     return userModel.deleteOne({ _id: id });
+  }
+
+  static updateRoleById(id, role) {
+    return userModel.updateOne({ _id: id }, { $set: { role: role } });
+  }
+
+  static updatePassword(id, password) {
+    return userModel.updateOne({ _id: id }, { $set: { password : password } });
+
   }
 }

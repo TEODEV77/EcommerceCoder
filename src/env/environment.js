@@ -29,6 +29,11 @@ export class DevEnvironment {
             jwt: {
                 secret: process.env.JWT_SECRET,
                 expiresIn: process.env.JWT_EXPIRES_IN,
+            },
+            mail: {
+                user: process.env.MAIL_USER,
+                pass: process.env.MAIL_PASS,
+                port: process.env.MAIL_PORT,
             }
         }
     }
@@ -66,6 +71,11 @@ export class TestEnvironment {
             jwt: {
                 secret: process.env.JWT_SECRET,
                 expiresIn: process.env.JWT_EXPIRES_IN,
+            },
+            mail: {
+                user: process.env.MAIL_USER,
+                pass: process.env.MAIL_PASS,
+                port: process.env.MAIL_PORT,
             }
         }
     }
@@ -103,6 +113,11 @@ export class ProdEnvironment {
             jwt: {
                 secret: process.env.JWT_SECRET,
                 expiresIn: process.env.JWT_EXPIRES_IN,
+            },
+            mail: {
+                user: process.env.MAIL_USER,
+                pass: process.env.MAIL_PASS,
+                port: process.env.MAIL_PORT,
             }
         }
     }

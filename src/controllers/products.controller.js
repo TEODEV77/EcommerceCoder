@@ -2,8 +2,6 @@ import ProductsService from "../services/products.service.js";
 import { BadRequest } from "../utils/exception.js";
 
 export default class ProductsController {
-  
-  
   static getAll(queryCriteria, options) {
     return ProductsService.getAll(queryCriteria, options);
   }
@@ -12,7 +10,7 @@ export default class ProductsController {
     return ProductsService.getProduct(id);
   }
 
-  static create(payload) {
+  static create(payload, email) {
     const { title, code, category, description, stock, price, status } =
       payload;
     if (
@@ -26,7 +24,10 @@ export default class ProductsController {
     ) {
       throw new BadRequest("Missing required properties");
     }
-    return ProductsService.create(payload);
+
+    email = email ? email : 'admin';
+
+    return ProductsService.create(payload,email);
   }
 
   static async updateById(id, payload) {

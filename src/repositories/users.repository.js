@@ -3,6 +3,10 @@ export default class UserRepository {
     this.dao = dao;
   }
 
+  static findById (id){
+    return this.dao.findById(id);
+  }
+
   static create(payload) {
     return this.dao.create(payload);
   }
@@ -17,5 +21,18 @@ export default class UserRepository {
 
   static deleteById(id) {
     return this.dao.deleteOne({ _id: id });
+  }
+
+  static updateRoleById(id, role){
+    return this.dao.updateRoleById(id,role);
+  }
+
+  static checkLastPassword(id, password){
+    return this.dao.checkLastPassword(id, password);
+  }
+
+  static updatePassword(id, password){
+    console.log(password);
+    return this.dao.updatePassword(id, password);
   }
 }
