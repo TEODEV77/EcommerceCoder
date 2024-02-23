@@ -18,7 +18,7 @@ export default class Messages {
 
   static serverRunning(host, port) {
     this.logger.info(
-      `${ColorsMessage.title('Server running at: ')} ${ColorsMessage.value(
+      `${ColorsMessage.title('Server running at: ')}${ColorsMessage.value(
         host
       )}:${ColorsMessage.separator(port)}`
     );

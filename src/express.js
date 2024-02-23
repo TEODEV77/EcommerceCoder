@@ -6,6 +6,9 @@ import cookieParser from "cookie-parser";
 import { __dirname, flags } from "./utils.js";
 import { initPassport } from "./config/passport.config.js";
 
+import swaggerJsDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+
 import renderRouter from "./routers/views/render.routes.js";
 import renderAuthRouter from "./routers/views/render.auth.routes.js";
 import renderAdminRouter from "./routers/views/render.admin.routes.js";
@@ -34,6 +37,21 @@ const app = express();
 app.use(loggerMiddleware);
 app.use(cookieParser(secret));
 app.use(express.json());
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "API Ecommerce",
+      description: "API Documentation",
+    },
+  },
+  apis: [path.join(__dirname, ".", "docs", "**", "*.yaml")],
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
 
@@ -44,7 +62,17 @@ app.set("view engine", "handlebars");
 initPassport();
 app.use(passport.initialize());
 
-app.use("/api", authRouter, routerProducts, routerCart, mockRouter, routerMessage, loggerRouter, routerMail, userRouter);
+app.use(
+  "/api",
+  authRouter,
+  routerProducts,
+  routerCart,
+  mockRouter,
+  routerMessage,
+  loggerRouter,
+  routerMail,
+  userRouter
+);
 app.use(
   "/",
   renderRouter,
@@ -53,13 +81,12 @@ app.use(
   renderAuthRouter,
   routerIo,
   routerAdminIo,
-  artilleryRouter,
+  artilleryRouter
 );
 
 app.get("/", (req, res) => {
   res.redirect("login");
 });
-
 
 app.use(errorHandler);
 
