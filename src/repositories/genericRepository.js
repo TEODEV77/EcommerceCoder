@@ -12,6 +12,10 @@ export default class GenericRepository {
         return this.dao.getBy(params);
     }
 
+    populate = (id) => {
+        return this.dao.populate(id);
+    }
+
     save = (payload) => {
         return this.dao.save(payload);
     }

@@ -1,5 +1,15 @@
 paths:
   /api/dev/carts:
+    post:
+      summary: Create a new cart
+      tags:
+        - Carts
+      responses:
+        201:
+          description: Created
+        500: 
+          description: Internal Server Error
+    
     get:
       summary: Get all carts
       tags:
@@ -9,3 +19,67 @@ paths:
           description: OK
         500: 
           description: Internal Server Error
+    
+  /api/dev/carts/{id}:
+    get:
+      summary: Get a cart by id
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The id of the cart
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+
+    put:
+      summary: Update cart by id
+      tags:
+        - Carts
+      responses:
+        201:
+          description: Updated
+        500: 
+          description: Internal Server Error
+
+  /api/dev/carts/populate/{id}:
+    get:
+      summary: Populate cart by id
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The id of the cart
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+    
+    delete:
+      summary: Delete cart by id
+      tags:
+        - Carts
+      responses:
+        201:
+          description: Deleted
+        500: 
+          description: Internal Server Error
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for a cart
+        products:
+          type: array
+          description: The products in the cart
+            

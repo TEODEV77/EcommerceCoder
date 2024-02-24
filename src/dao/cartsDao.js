@@ -10,6 +10,10 @@ export default class Cart {
         return cartModel.findOne(params);
     }
 
+    populate = (id) => {
+        return cartModel.findOne(id).populate("products.product");
+    }
+
     save = (payload) => {
         return cartModel.create(payload);
     }
