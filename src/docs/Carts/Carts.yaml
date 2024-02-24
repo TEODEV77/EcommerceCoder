@@ -1,5 +1,5 @@
 paths:
-  /api/carts:
+  /api/dev/carts:
     get:
       summary: Get all carts
       tags:
