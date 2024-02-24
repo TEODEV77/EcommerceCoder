@@ -31,10 +31,20 @@ const populateCart = async (req, res, next) => {
   }
 };
 
+const createCart = async (req, res, next) => {
+  try {
+    const body = { products: [] };
+    const cart = await cartsService.save(body);
+    res.status(201).json({ status: "success", payload: cart });
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 export default {
   getAllCarts,
   getCartById,
   populateCart,
+  createCart,
 };

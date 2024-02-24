@@ -46,6 +46,39 @@ paths:
         500: 
           description: Internal Server Error
 
+    delete:
+      summary: Delete cart by id
+      tags:
+        - Carts
+      responses:
+        201:
+          description: Deleted
+        500: 
+          description: Internal Server Error
+  
+  /api/dev/carts/{id}/{pid}:
+    post:
+      summary: Add product to cart 
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The id of the cart
+          schema:
+            type: string
+        
+        - in: path
+          name: pid
+          required: true
+          description: The id of the product
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+
   /api/dev/carts/populate/{id}:
     get:
       summary: Populate cart by id
@@ -62,15 +95,7 @@ paths:
         200:
           description: OK
     
-    delete:
-      summary: Delete cart by id
-      tags:
-        - Carts
-      responses:
-        201:
-          description: Deleted
-        500: 
-          description: Internal Server Error
+    
 components:
   schemas:
     Cart:
