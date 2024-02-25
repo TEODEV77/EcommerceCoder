@@ -7,18 +7,18 @@ export default class Product {
     }
 
     getBy = (params) => {
-        return cartModel.findOne(params);
+        return productModel.findOne(params);
     }
 
     save = (payload) => {
-        return cartModel.create(payload);
+        return productModel.create(payload);
     }
 
     update = (id, payload) => {
-        return cartModel.findByIdAndUpdate(id, { $set: payload });
+        return productModel.findByIdAndUpdate(id, { $set: payload });
     }
 
     delete = (id) => {
-        return cartModel.findByIdAndDelete(id);
+        return productModel.findByIdAndDelete(id);
     }
 }

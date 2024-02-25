@@ -1,5 +1,5 @@
 import { cartsService } from "../services/index.service.js";
-
+import { addProductToCartLogic } from "../logic/cart.logic.js";
 const getAllCarts = async (req, res, next) => {
   try {
     const carts = await cartsService.getAll();
@@ -41,10 +41,24 @@ const createCart = async (req, res, next) => {
   }
 };
 
+const addProductToCart = async (req, res, next) => {
+  const { id, pid } = req.params;
+  //const { quantity } = req.body;
+  try {
+    const body = await addProductToCartLogic(id,pid,5);
+    const cart = await cartsService.save(body);
+    res.status(201).json({ status: "success", payload: cart });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 
 export default {
   getAllCarts,
   getCartById,
   populateCart,
   createCart,
+  addProductToCart,
 };
