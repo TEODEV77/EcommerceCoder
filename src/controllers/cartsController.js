@@ -5,6 +5,7 @@ const getAllCarts = async (req, res, next) => {
     const carts = await cartsService.getAll();
     res.status(200).json({ status: "success", payload: carts });
   } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
     next(error);
   }
 };
@@ -53,7 +54,38 @@ const addProductToCart = async (req, res, next) => {
   }
 };
 
+const purchase = async (req, res, next) => {
+  const { user } = req;
+  try {
+    res.status(201).json({ status: "success", payload: 'purchase' });
+  } catch (error) {
+    next(error);
+  }
+};
 
+const deleteItemFromCart = async (req, res, next) => {
+  try {
+    res.status(201).json({ status: "success", payload: 'deleteItemFromCart' });
+  } catch (error) {
+    next(error);
+  }
+}
+
+const deleteItemsFromCart = async (req, res, next) => {
+  try {
+    res.status(201).json({ status: "success", payload: 'deleteItemsFromCart' });
+  } catch (error) {
+    next(error);
+  }
+}
+
+const deleteCart = async (req, res, next) => {
+  try {
+    res.status(201).json({ status: "success", payload: 'deleteCart' });
+  } catch (error) {
+    next(error);
+  }
+}
 
 export default {
   getAllCarts,
@@ -61,4 +93,8 @@ export default {
   populateCart,
   createCart,
   addProductToCart,
+  purchase,
+  deleteItemFromCart,
+  deleteItemsFromCart,
+  deleteCart
 };
