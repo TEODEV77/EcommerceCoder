@@ -21,7 +21,6 @@ const checkCartAndProduct = async (id, pid) => {
 export const addProductToCartLogic = async (id, pid, quantity) => {
 
     const cart = await checkCartAndProduct(id, pid);
-
     const productCart = cart.products.find((productId) => productId.product == pid);
 
     if(productCart){

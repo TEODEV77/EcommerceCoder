@@ -43,11 +43,11 @@ const createCart = async (req, res, next) => {
 
 const addProductToCart = async (req, res, next) => {
   const { id, pid } = req.params;
-  //const { quantity } = req.body;
+  const { quantity } = req.body;
   try {
-    const body = await addProductToCartLogic(id,pid,5);
-    const cart = await cartsService.save(body);
-    res.status(201).json({ status: "success", payload: cart });
+    const body = await addProductToCartLogic(id,pid,quantity);
+    await cartsService.update(id, body);
+    res.status(201).json({ status: "success", payload: body});
   } catch (error) {
     next(error);
   }
