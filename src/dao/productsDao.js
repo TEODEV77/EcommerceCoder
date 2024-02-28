@@ -6,6 +6,10 @@ export default class Product {
         return productModel.find(params);
     }
 
+    paginate = (queryCriteria,options) => {
+        return productModel.paginate(queryCriteria, options);
+    }
+
     getBy = (params) => {
         return productModel.findOne(params);
     }

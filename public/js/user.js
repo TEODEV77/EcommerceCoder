@@ -1,7 +1,7 @@
 const notMatchPassword = () => {
   Swal.fire({
     icon: "error",
-    title: 'U',
+    title: 'Password not match, try again!',
     showConfirmButton: false,
     timer: 3700,
   });
@@ -31,10 +31,12 @@ const updatePassword = async (id) => {
       "Content-Type": "application/json",
     },
   }).then((res) => {
+    if(!res.ok){
+      return notMatchPassword();
+    }
     successUpdated();
-    //location.href = '/login';
-  }).catch((err) => {
-    notMatchPassword();
-  });
+    location.href = "/login";
+  })
     
 };
+

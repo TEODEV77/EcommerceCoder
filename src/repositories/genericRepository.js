@@ -16,6 +16,10 @@ export default class GenericRepository {
         return this.dao.populate(id);
     }
 
+    paginate = (queryCriteria, options) => {
+        return this.dao.paginate(queryCriteria, options);
+    }
+
     save = (payload) => {
         return this.dao.save(payload);
     }

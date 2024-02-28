@@ -80,8 +80,11 @@ const deleteItemsFromCart = async (req, res, next) => {
 }
 
 const deleteCart = async (req, res, next) => {
+  const { id } = req.params;
   try {
-    res.status(201).json({ status: "success", payload: 'deleteCart' });
+    const query = { _id: id };
+    await cartsService.delete(query);
+    res.status(204).json({ status: "success", payload: 'Cart has been deleted' });
   } catch (error) {
     next(error);
   }
