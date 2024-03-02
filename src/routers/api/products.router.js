@@ -25,4 +25,11 @@ router.put(
   productsController.update
 );
 
+router.delete(
+  "/:id",
+  authMiddlewarePassport("jwt"),
+  authorizeMiddlewarePassport(["admin", "premium"]),
+  productsController.deleteProduct
+);
+
 export default router;

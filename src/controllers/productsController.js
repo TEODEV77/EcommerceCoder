@@ -31,6 +31,9 @@ const getById = async (req, res, next) => {
   const query = { _id: id };
   try {
     const product = await productsService.getBy(query);
+    if(!product){
+      return res.status(404).json({ status: "error", message: "Product not found" });
+    }
     res.status(200).json({ status: "success", payload: product });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
@@ -95,9 +98,26 @@ const update = async (req, res, next) => {
   }
 };
 
+const deleteProduct = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const {role,email} = req.user;
+    const checkOwn = await checkOwner({role,email,id});
+    if(!checkOwn){
+      return res.status(403).json({ status: "error", message: "Unauthorized" });
+    }
+    await productsService.delete(id);
+    return res.status(200).json({ status: "success"});
+  } catch (error) {
+    res.status(500).json({ message: error });
+    next(error);
+  }
+};
+
 export default {
   getAllProducts,
   getById,
   create,
   update,
+  deleteProduct
 };
