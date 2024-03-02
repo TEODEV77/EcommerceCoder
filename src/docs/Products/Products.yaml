@@ -1,0 +1,176 @@
+paths:
+  /api/dev/products:
+    get:
+      summary: Get all products
+      tags:
+        - Products
+      responses:
+        200:
+          description: OK
+        500: 
+          description: Internal Server Error
+    post:
+      summary: Create a new product
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the product
+                  example: "Product Name"
+                code:
+                  type: string
+                  description: The unique code of the product
+                  example: "PROD001"
+                owner:
+                  type: string
+                  description: The owner of the product
+                  example: "admin"
+                category:
+                  type: string
+                  description: The category of the product
+                  example: "Electronics"
+                description:
+                  type: string
+                  description: The description of the product
+                  example: "This is a great product."
+                stock:
+                  type: integer
+                  description: The stock quantity of the product
+                  example: 100
+                price:
+                  type: number
+                  description: The price of the product
+                  example: 99.99
+                status:
+                  type: boolean
+                  description: The status of the product (true for active, false for inactive)
+                  example: true
+                thumbnails:
+                  type: array
+                  description: Array of image URLs for product thumbnails
+                  items:
+                    type: string
+      responses:
+        200:
+          description: Product created successfully
+        
+        400:
+          description: Bad request, invalid input, or missing required fields
+        
+        500:
+          description: Internal server error
+  
+  /api/dev/products/{id}:
+    get:
+      summary: Get a product by ID
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the product to retrieve
+          example: "60a8e2d97ae4b7a59c8d2b4e"
+      responses:
+        200:
+          description: OK
+
+        500:
+          description: Internal server error
+    
+    put:
+      summary: Update product by ID
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the product to retrieve
+          example: "60a8e2d97ae4b7a59c8d2b4e"
+      responses:
+        200:
+          description: OK
+
+        500:
+          description: Internal server error
+    
+    delete:
+      summary: Delete product by ID
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the product to retrieve
+          example: "60a8e2d97ae4b7a59c8d2b4e"
+      responses:
+        200:
+          description: OK
+
+        500:
+          description: Internal server error
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the product
+          example: "Product Name"
+        code:
+          type: string
+          description: The unique code of the product
+          example: "PROD001"
+        owner:
+          type: string
+          description: The owner of the product
+          example: "admin"
+        category:
+          type: string
+          description: The category of the product
+          example: "Electronics"
+        description:
+          type: string
+          description: The description of the product
+          example: "This is a great product."
+        stock:
+          type: integer
+          description: The stock quantity of the product
+          example: 100
+        price:
+          type: number
+          description: The price of the product
+          example: 99.99
+        status:
+          type: boolean
+          description: The status of the product (true for active, false for inactive)
+          example: true
+        thumbnails:
+          type: array
+          description: Array of image URLs for product thumbnails
+          items:
+            type: string
+      required:
+        - title
+        - code
+        - category
+        - description
+        - stock
+        - price

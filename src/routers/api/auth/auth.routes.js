@@ -19,8 +19,8 @@ authRouter.post("/sessions/auth/register", async (req, res, next) => {
     const hashedPassword = bcrypt.hashSync(body.password, salt); 
     body.password = hashedPassword;
     body.role = body.role === "" ? "user" : body.role;
-    await UsersController.createUserCart(body);
-    res.redirect("/login");
+    const user = await UsersController.createUserCart(body);
+    res.status(201).json(user);
   } catch (error) {
     next(error);
   }

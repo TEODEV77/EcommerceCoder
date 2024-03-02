@@ -15,6 +15,7 @@ import renderAdminRouter from "./routers/views/render.admin.routes.js";
 import renderProduct from "./routers/views/render.product.js";
 
 import cartsRouter from './routers/api/carts.router.js';
+import productsRouter from './routers/api/products.router.js';
 
 import routerProducts from "./routers/api/product.routes.js";
 import routerCart from "./routers/api/cart.routes.js";
@@ -67,6 +68,7 @@ app.use(passport.initialize());
 
 
 app.use('/api/dev/carts', cartsRouter);
+app.use('/api/dev/products', productsRouter);
 
 app.use(
   "/api",
