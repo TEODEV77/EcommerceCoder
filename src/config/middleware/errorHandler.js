@@ -1,4 +1,5 @@
 import EnumsError from "../../utils/EnumsError.js";
+import { genericErrorHandler } from "../custom/genericError.js";
 import { authErrorHandler } from "../handlers/authErrorHandler.js";
 import { dbErrorHandler } from "../handlers/dbErrorHandler.js";
 import { routingErrorHandler } from "../handlers/routingErrorHandler.js";
@@ -23,7 +24,7 @@ export const errorHandler = (err, req, res, next) => {
       serverErrorHandler(err, req, res);
       break;
     default:
-      res.status(500).json({ error: err.message });
+      genericErrorHandler(err, req, res, err.code);
       break;
   }
 };
