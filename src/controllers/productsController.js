@@ -21,7 +21,6 @@ const getAllProducts = async (req, res, next) => {
     const products = await productsService.paginate(queryCriteria, options);
     res.status(200).json({ status: "success", payload: products });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
     next(error);
   }
 };
@@ -31,13 +30,19 @@ const getById = async (req, res, next) => {
   const query = { _id: id };
   try {
     const product = await productsService.getBy(query);
-    if(!product){
-      return res.status(404).json({ status: "error", message: "Product not found" });
+    if (!product) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Product not found" });
     }
     res.status(200).json({ status: "success", payload: product });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-    next(error);
+    res
+      .status(404)
+      .json({
+        message: `The product with id: ${id} doesn't exist`,
+        cause: error.message,
+      });
   }
 };
 
@@ -68,8 +73,9 @@ const create = async (req, res, next) => {
     const product = await productsService.save(payload);
     res.status(201).json({ status: "success", payload: product });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-    next(error);
+    res
+      .status(400)
+      .json({ message: "Error creating product", cause: error.message });
   }
 };
 
@@ -85,32 +91,40 @@ const update = async (req, res, next) => {
     status,
   };
   try {
-    const {role,email} = req.user;
-    const checkOwn = await checkOwner({role,email,id});
-    if(!checkOwn){
+    const { role, email } = req.user;
+    const checkOwn = await checkOwner({ role, email, id });
+    if (!checkOwn) {
       return res.status(403).json({ status: "error", message: "Unauthorized" });
     }
-    const product = await productsService.update(id, payload);
-    return res.status(200).json({ status: "success", payload: product });
+    await productsService.update(id, payload);
+    return res.status(200).json({ status: "success"});
   } catch (error) {
-    res.status(500).json({ message: error });
-    next(error);
+    res
+      .status(404)
+      .json({
+        message: `The product update was unsuccessful.`,
+        cause: error.message,
+      });
   }
 };
 
 const deleteProduct = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const {role,email} = req.user;
-    const checkOwn = await checkOwner({role,email,id});
-    if(!checkOwn){
+    const { role, email } = req.user;
+    const checkOwn = await checkOwner({ role, email, id });
+    if (!checkOwn) {
       return res.status(403).json({ status: "error", message: "Unauthorized" });
     }
     await productsService.delete(id);
-    return res.status(200).json({ status: "success"});
+    return res.status(200).json({ status: "success" });
   } catch (error) {
-    res.status(500).json({ message: error });
-    next(error);
+    res
+      .status(404)
+      .json({
+        message: `The product delete was unsuccessful.`,
+        cause: error.message,
+      }); 
   }
 };
 
@@ -119,5 +133,5 @@ export default {
   getById,
   create,
   update,
-  deleteProduct
+  deleteProduct,
 };

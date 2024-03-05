@@ -7,6 +7,7 @@ import { serverErrorHandler } from "../handlers/serverErrorHandler.js";
 import { userErrorHandler } from "../handlers/userErrorHandler.js";
 
 export const errorHandler = (err, req, res, next) => {
+  console.log(err);
   switch (err.idx) {
     case EnumsError.USER_ERROR.IDX:
       userErrorHandler(err, req, res);
@@ -24,7 +25,7 @@ export const errorHandler = (err, req, res, next) => {
       serverErrorHandler(err, req, res);
       break;
     default:
-      genericErrorHandler(err, req, res, err.code);
+      genericErrorHandler(err, req, res);
       break;
   }
 };
