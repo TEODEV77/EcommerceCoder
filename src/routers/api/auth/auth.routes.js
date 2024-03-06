@@ -20,7 +20,7 @@ authRouter.post("/sessions/auth/register", async (req, res, next) => {
     body.password = hashedPassword;
     body.role = body.role === "" ? "user" : body.role;
     const user = await UsersController.createUserCart(body);
-    res.status(201).json(user);
+    res.status(201).json({ status: "success", payload: user });
   } catch (error) {
     next(error);
   }
@@ -40,10 +40,11 @@ authRouter.post("/sessions/auth/login", async (req, res) => {
   if (comparePassword) {
     const token = generateToken(user,'auth','2h');        
     res.cookie("token", token, options);
-    return res.json(token);
+    return res.json({ status: "success", payload: token });
     return res.redirect('/me');
   } else {
-    return res.redirect("/unauthorized");
+    return res.status(400).json({ status: "error", message: 'User/Password Invalid' });
+    //return res.redirect("/unauthorized");
   }
 });
 

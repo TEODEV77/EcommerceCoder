@@ -4,13 +4,57 @@ import SingletonEnvironment from "../env/singletonEnvironment.js";
 
 import { flags } from "../utils.js";
 
-
 const { environment } = SingletonEnvironment.getInstance(flags.environ);
 const { host, port } = environment.env.api;
 
 const local = `${host}:${port}/`;
 
 const requester = supertest(`http://127.0.0.1:7070`);
+
+describe("Users API", () => {
+  it("should return a token", async () => {
+    const userMock = {
+      email: "user300@gmail.com",
+      password: "123",
+    };
+    const { statusCode, body, ok } = await requester
+      .post("/api/sessions/auth/login")
+      .send(userMock);
+    expect(statusCode).to.equal(200);
+    expect(ok).to.be.ok;
+    expect(body).to.have.property("status").to.equal("success");
+    expect(body).to.have.property("payload").to.be.an("string");
+  });
+
+  it("should create an user", async () => {
+    const userMock = {
+      firstName: "User 701",
+      lastName: "700",
+      email: "user701@gmail.com",
+      password: "123",
+      age: 701,
+    };
+    const { statusCode, body, ok } = await requester
+      .post("/api/sessions/auth/register")
+      .send(userMock);
+    expect(statusCode).to.equal(201);
+    expect(ok).to.be.ok;
+    expect(body).to.have.property("status").to.equal("success");
+    expect(body).to.have.property("payload").to.be.an("object");
+  });
+
+  it("(Wrong credentials) - should return an error", async () => {
+    const userMock = {
+      email: "user300@gmail.com",
+      password: "12",
+    };
+    const { statusCode, body } = await requester
+      .post("/api/sessions/auth/login")
+      .send(userMock);
+    expect(statusCode).to.equal(400);
+    expect(body).to.have.property("status").to.equal("error");
+  });
+});
 
 describe("Carts API", () => {
   it("should return a list of carts", async () => {
@@ -56,7 +100,7 @@ describe("Products API", () => {
   });
 
   it("should return a error", async () => {
-    const { statusCode, body, ok } = await requester.get(
+    const { statusCode, body } = await requester.get(
       "/api/dev/products/6558dd604e0a87e8653455f1"
     );
     expect(statusCode).to.equal(404);
