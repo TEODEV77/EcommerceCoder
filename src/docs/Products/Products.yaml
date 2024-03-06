@@ -6,13 +6,99 @@ paths:
         - Products
       responses:
         200:
-          description: OK
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The status of the response
+                example: "success"
+              
+              payload:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        owner:
+                          type: string
+                          example: admin
+                        _id:
+                          type: string
+                          example: 6558dd604e0a87e8653355f1
+                        title:
+                          type: string
+                          example: MacBook Pro 2023
+                        code:
+                          type: string
+                          example: '3'
+                        category:
+                          type: string
+                          example: Laptop
+                        description:
+                          type: string
+                          example: The MacBook Pro 2023 is Apple's flagship laptop, featuring a stunning Retina display, M2 Pro chip, an improved Magic Keyboard, and outstanding performance for creative professionals.
+                        stock:
+                          type: integer
+                          example: 37
+                        price:
+                          type: integer
+                          example: 2199
+                        status:
+                          type: boolean
+                          example: true
+                        thumbnails:
+                          type: array
+                          items:
+                            type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                          example: '2023-11-18T15:50:56.395Z'
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          example: '2024-01-25T15:18:43.185Z'
+                        __v:
+                          type: integer
+                          example: 0
+                  
+                  totalDocs:
+                    type: integer
+                    example: 10
+                  limit:
+                    type: integer
+                    example: 10
+                  totalPages:
+                    type: integer
+                    example: 1
+                  page:
+                    type: integer
+                    example: 1
+                  pagingCounter:
+                    type: integer
+                    example: 1
+                  hasPrevPage:
+                    type: boolean
+                    example: false
+                  hasNextPage:
+                    type: boolean
+                    example: false
         500: 
           description: Internal Server Error
     post:
       summary: Create a new product
       tags:
         - Products
+      
+      security:
+        - auth:
+            - 'admin'
+            - 'premium'
+      
       requestBody:
         required: true
         content:
@@ -72,6 +158,7 @@ paths:
       summary: Get a product by ID
       tags:
         - Products
+      
       parameters:
         - in: path
           name: id
