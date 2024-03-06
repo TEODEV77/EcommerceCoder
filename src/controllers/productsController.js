@@ -25,7 +25,7 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res, next) => {
+const getById = async (req, res) => {
   const { id } = req.params;
   const query = { _id: id };
   try {
@@ -46,7 +46,7 @@ const getById = async (req, res, next) => {
   }
 };
 
-const create = async (req, res, next) => {
+const create = async (req, res) => {
   const {
     title,
     code,
@@ -79,7 +79,7 @@ const create = async (req, res, next) => {
   }
 };
 
-const update = async (req, res, next) => {
+const update = async (req, res) => {
   const { id } = req.params;
   const { title, category, description, stock, price, status } = req.body;
   const payload = {
@@ -108,7 +108,7 @@ const update = async (req, res, next) => {
   }
 };
 
-const deleteProduct = async (req, res, next) => {
+const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
     const { role, email } = req.user;
@@ -135,3 +135,4 @@ export default {
   update,
   deleteProduct,
 };
+
