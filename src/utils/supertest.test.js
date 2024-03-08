@@ -9,9 +9,9 @@ describe("Auth tests", () => {
   describe("Session tests", () => {
     it("(Sign-up) - Should create an user", async () => {
       const userMock = {
-        firstName: "User 707",
-        lastName: "707",
-        email: "user707@gmail.com",
+        firstName: "User 777",
+        lastName: "777",
+        email: "user777@gmail.com",
         password: "123",
         age: 701,
       };
@@ -47,13 +47,13 @@ describe("Auth tests", () => {
           .post("/api/dev/products")
           .set("Cookie", [`${cookie.key}=${cookie.value}`])
           .send({
-            title: "Test Product 7",
-            code: "TST-PRD 7",
+            title: "Test Product 77",
+            code: "TST-PRD 77",
             category: "Test",
             owner: "user300@gmail.com",
-            description: "This is a test product 7",
-            stock: 60,
-            price: 600,
+            description: "This is a test product 77",
+            stock: 77,
+            price: 777,
             status: true,
             thumbnails: ["test5.jpg"],
           });
@@ -82,7 +82,7 @@ describe("Auth tests", () => {
 
       it("should delete a product successfully", async () => {
         const { statusCode, ok } = await requester
-          .delete("/api/dev/products/65eb72a390c9c2adc362cecc")
+          .delete("/api/dev/products/65eb6f432cd58844ca8424eb")
           .set("Cookie", [`${cookie.key}=${cookie.value}`]);
         expect(statusCode).to.equal(200);
         expect(ok).to.be.ok;
